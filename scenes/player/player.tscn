@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=3 uid="uid://dh6ayt48o5ar3"]
+
+[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_c21pa"]
+[ext_resource type="Texture2D" uid="uid://br06u3wt2gp3" path="res://sprites/player/mystique/mystique approved.png" id="1_n48gx"]
+[ext_resource type="PackedScene" uid="uid://5qfhw4odqn10" path="res://scenes/player/orb.tscn" id="3_q2m27"]
+[ext_resource type="Texture2D" uid="uid://dnxtfqsjsm6so" path="res://sprites/player/Cursor.png" id="4_7rt1q"]
+[ext_resource type="Script" path="res://Cursor.gd" id="4_vys5e"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r868e"]
+radius = 8.0
+height = 50.0
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_c21pa")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 1
+texture = ExtResource("1_n48gx")
+
+[node name="Orb" parent="." instance=ExtResource("3_q2m27")]
+position = Vector2(-20, -40)
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 7)
+shape = SubResource("CapsuleShape2D_r868e")
+
+[node name="Camera" type="Camera2D" parent="."]
+
+[node name="Cursor" type="Sprite2D" parent="Camera"]
+texture = ExtResource("4_7rt1q")
+script = ExtResource("4_vys5e")

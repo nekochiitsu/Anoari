@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://5qfhw4odqn10"]
+
+[ext_resource type="Texture2D" uid="uid://cbg70ent2guy1" path="res://sprites/player/orb/ball.png" id="1_6g2sd"]
+[ext_resource type="Script" path="res://scripts/player/orb.gd" id="1_ld6th"]
+[ext_resource type="Texture2D" uid="uid://bj8cgdplcekqx" path="res://sprites/player/orb/spell2.png" id="2_5k4b4"]
+[ext_resource type="Texture2D" uid="uid://veichidyaqrg" path="res://sprites/player/orb/spell1.png" id="3_muycj"]
+
+[node name="Orb" type="Node2D"]
+script = ExtResource("1_ld6th")
+
+[node name="Orb" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_6g2sd")
+
+[node name="Spell 1" type="Sprite2D" parent="Orb"]
+texture = ExtResource("2_5k4b4")
+
+[node name="Spell 2" type="Sprite2D" parent="Orb"]
+texture = ExtResource("3_muycj")
