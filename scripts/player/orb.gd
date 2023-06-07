@@ -1,5 +1,7 @@
 extends Node2D
 
+@onready var autoattack = preload("res://scenes/player/autoattack.tscn")
+
 var focus = false
 var wander_amount = 5
 var hover_timer = 0
@@ -58,10 +60,14 @@ func _process(delta):
 
 func auto_attack(target):
 	print("piou !")
-	#TODO : cast l'autoattack en direction de target
+	var new_aa = autoattack.instantiate()
+	new_aa.global_position = global_position
+	new_aa.target = target
+	get_node("../..").add_child(new_aa) #ça l'ajoute dans game for now	
 
 func cast_spell(spell,target):
 	print("kapshwaaah")
+	
 	#TODO : cast le spell si castable, spell = 0 ou 1 
 
 func switch_spell(spell, new_spell):

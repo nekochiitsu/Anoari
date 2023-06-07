@@ -43,6 +43,13 @@ shooting_mode={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="ground"
+2d_physics/layer_9="player"
+2d_physics/layer_10="enemies"
+2d_physics/layer_11="spells"
+
 [rendering]
 
 environment/defaults/default_clear_color=Color(0, 0, 0, 1)
