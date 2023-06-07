@@ -9,7 +9,7 @@ var stats:Dictionary = {
 	"attack speed":0,
 	"crit chance":0,
 	"spellcrit chance":0,
-	"agaility":0,
+	"agility":0,
 	"max mana":0,
 	"mana regen":0,
 	"crit damages":0,
