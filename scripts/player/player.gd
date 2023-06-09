@@ -40,7 +40,7 @@ func _input(event):
 				get_node("Orb").focus = false
 
 func _process(delta):
-	pass
+	base_stats()
 
 func _physics_process(delta):
 	#get_node("Head").look_at(get_node("../Camera/Cursor").global_position)
@@ -67,4 +67,19 @@ func _physics_process(delta):
 	move_and_slide()
 
 func base_stats():
-	pass #set les stats de base
+	stats["hp"] = 0
+	stats["attack"] = 0 
+	stats["defense"] = 0
+	stats["speed"] = 0
+	stats["ability haste"] = 0
+	stats["attack speed"] = 0.5
+	stats["crit chance"] = 0
+	stats["spellcrit chance"] = 0
+	stats["agility"] = 0
+	stats["max mana"] = 0
+	stats["mana regen"] = 0
+	stats["crit damages"] = 0
+	stats["defense ignore"] = 0
+	stats["exp multiplier"] = 0 
+	stats["armor"] = 0 #removes flat damages
+	stats["damage multiplier"] = 0 

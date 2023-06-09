@@ -13,6 +13,7 @@ func _ready():
 	base_stats()
 	scale = Vector2(1,1)*stats["size"]
 	rotation = global_position.direction_to(target).angle()
+	#TODO couleur
 
 func _process(delta):
 	velocity = transform.x*stats["speed"]

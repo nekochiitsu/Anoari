@@ -1,7 +1,9 @@
 extends Node2D
 
+
 @onready var autoattack = preload("res://scenes/player/autoattack.tscn")
 
+var player
 var focus = false
 var wander_amount = 5
 var hover_timer = 0
@@ -10,6 +12,12 @@ var focus_pos = Vector2(-21,-41)
 var last_frame_pos = base_pos
 var target_pos = base_pos
 var offset_y = 0
+
+var CD:Dictionary = {
+	"autoattack":0,
+	"spell 1":0,
+	"spell 2":0
+}
 
 var spells = [
 	{
@@ -42,11 +50,14 @@ var spells = [
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	player = get_node("..")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	for k in CD.keys():
+		if CD[k] > 0:
+			CD[k] -= delta
 	if focus:
 		target_pos = Vector2(focus_pos[0],focus_pos[1])
 	else:
@@ -59,16 +70,26 @@ func _process(delta):
 	last_frame_pos = position
 
 func auto_attack(target):
-	print("piou !")
+	if CD["autoattack"] > 0:
+		#anim spell fail ?
+		print("on cd")
+		return
+	CD["autoattack"] = player.stats["attack speed"]
 	var new_aa = autoattack.instantiate()
 	new_aa.global_position = global_position
 	new_aa.target = target
 	get_node("../..").add_child(new_aa) #ça l'ajoute dans game for now	
 
 func cast_spell(spell,target):
-	print("kapshwaaah")
-	
-	#TODO : cast le spell si castable, spell = 0 ou 1 
+	if CD["spell "+str(spell)] > 0:
+		#anim spell fail ?
+		print("on cd")
+		return
+	var new_spell = (load("res://scenes/player/spells/"+str(spells[spell]["type"]+str(spells[spell]["number"]))+".tscn")).instantiate()
+	new_spell.global_position = global_position
+	new_spell.target = target
+	get_node("../..").add_child(new_spell)
+	#structure : chaque spell a une scene localisée à /spells/<type>/<number>.tscn, why not trade number for name.
 
 func switch_spell(spell, new_spell):
 	pass
