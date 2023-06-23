@@ -1,0 +1,69 @@
+[gd_scene load_steps=6 format=3 uid="uid://fe6otdr2waxg"]
+
+[ext_resource type="Script" path="res://scripts/player/spells/earth/impale_summon.gd" id="1_7s2bg"]
+[ext_resource type="Texture2D" uid="uid://bj5khmsb80lcj" path="res://sprites/player/spells/earth/roc.png" id="1_jkf7s"]
+
+[sub_resource type="Animation" id="Animation_bhcyr"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, 0, 0, 0.1, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_4uv16"]
+resource_name = "summon"
+length = 4.0
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, 0, 0, 0.6, 1.2, 1, -0.5, 0.2, 0, 0, 0, -0.1, 1, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5, 4)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kg3o2"]
+_data = {
+"RESET": SubResource("Animation_bhcyr"),
+"summon": SubResource("Animation_4uv16")
+}
+
+[node name="impale_summon" type="CharacterBody2D"]
+script = ExtResource("1_7s2bg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0.299999, -16.1)
+texture = ExtResource("1_jkf7s")
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(0.299999, -12.1)
+polygon = PackedVector2Array(-9, 12.5, 10, 12.5, 11, 4.5, 6, 5.5, 5, -6.5, 0, -15.5, -4, -6.5, -6, 4.5, -10, 3.5)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_kg3o2")
+}
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
